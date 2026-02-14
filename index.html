@@ -49,20 +49,6 @@
           <span class="gradient-text">セキュリティガイド</span>
         </h1>
         <p>初心者でも今日から実践できるセキュリティ対策。<br>あなたのサイトを守るための5つの基本を学びましょう。</p>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="num">42%</span>
-            <span class="label">脆弱なサイトの割合</span>
-          </div>
-          <div class="hero-stat">
-            <span class="num">50%</span>
-            <span class="label">最新版を使用</span>
-          </div>
-          <div class="hero-stat">
-            <span class="num">5</span>
-            <span class="label">今日から実践できる対策</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -93,7 +79,7 @@
         <div class="principle-card animate-in">
           <div class="principle-num">04</div>
           <h3>信頼できるソース</h3>
-          <p>テーマやプラグインは公式レポジトリや信頼できる提供元から入手する。</p>
+          <p>テーマやプラグインは公式レポジトリや信頼できる提供元から入手する。ホスティングもWAFやマルウェアスキャンを提供する信頼性の高いサービスを選ぶ。</p>
         </div>
       </div>
 
@@ -168,6 +154,7 @@
             <li><strong>WordPressコア：</strong>マイナーアップデートは自動更新（推奨）</li>
             <li><strong>プラグイン：</strong>月1回の確認・手動更新推奨</li>
             <li><strong>テーマ：</strong>月1回の確認・手動更新推奨</li>
+            <li><strong>PHP：</strong>サーバーのPHPバージョンがサポート中か確認（ホスティング管理画面から変更可能）</li>
             <li>使っていないプラグイン・テーマは削除する</li>
           </ul>
           <div class="action-tip"><em>重要：</em>更新前には必ずバックアップを取得！</div>
@@ -384,33 +371,6 @@
         </div>
       </div>
 
-      <!-- Schedule Table -->
-      <table class="schedule-table animate-in">
-        <thead>
-          <tr>
-            <th>頻度</th>
-            <th>実施項目</th>
-            <th>所要時間</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="freq">毎週</td>
-            <td>WordPress・プラグイン・テーマの更新確認 / セキュリティアラート通知の確認</td>
-            <td>約5分</td>
-          </tr>
-          <tr>
-            <td class="freq">毎月</td>
-            <td>バックアップの復元テスト / 不要なアカウントの削除 / パスワードの変更</td>
-            <td>約30分</td>
-          </tr>
-          <tr>
-            <td class="freq">3ヶ月ごと</td>
-            <td>導入プラグインの見直し / セキュリティ設定の確認 / 簡易セキュリティ診断</td>
-            <td>1〜2時間</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <div class="section-divider"></div>
@@ -425,7 +385,7 @@
         <div class="checklist-sticky-header" id="phase1-sticky">
           <div class="checklist-phase-header">
             <h3>Phase 1：今すぐ実施（必須対策）</h3>
-            <span class="phase-badge urgent">&#x1f534; 緊急 — <span id="phase1-count">0</span> / 11 完了</span>
+            <span class="phase-badge urgent">&#x1f534; 緊急 — <span id="phase1-count">0</span> / 13 完了</span>
           </div>
           <div class="checklist-progress">
             <div class="checklist-progress-bar" id="phase1-progress"></div>
@@ -471,6 +431,15 @@
           </div>
           <div class="check-item" onclick="toggleCheck(this, 'phase1')">
             <div class="check-box"></div><span class="check-label">バックアップからの復元テストを実施</span>
+          </div>
+        </div>
+        <div class="checklist-category">
+          <h4>サーバー環境</h4>
+          <div class="check-item" onclick="toggleCheck(this, 'phase1')">
+            <div class="check-box"></div><span class="check-label">SSL/HTTPS が有効になっているか確認</span>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this, 'phase1')">
+            <div class="check-box"></div><span class="check-label">PHP バージョンがサポート中か確認</span>
           </div>
         </div>
       </div>

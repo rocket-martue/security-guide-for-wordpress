@@ -296,34 +296,6 @@ body {
   }
 }
 
-/* Hero Stats */
-.hero-stats {
-  display: flex;
-  justify-content: center;
-  gap: 48px;
-  animation: fadeUp 0.8s ease-out 0.3s both;
-}
-
-.hero-stat {
-  text-align: center;
-}
-
-.hero-stat .num {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 2.2rem;
-  font-weight: 600;
-  color: var(--accent-cyan);
-  display: block;
-  line-height: 1;
-}
-
-.hero-stat .label {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 8px;
-  display: block;
-}
-
 /* ==============================
    Sections
    ============================== */
@@ -791,51 +763,6 @@ body {
 }
 
 /* ==============================
-   Schedule Table
-   ============================== */
-.schedule-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  background: var(--bg-card);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  margin-top: 32px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.schedule-table th {
-  text-align: left;
-  padding: 14px 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.schedule-table td {
-  padding: 14px 20px;
-  font-size: 13.5px;
-  color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.schedule-table tr:last-child td {
-  border-bottom: none;
-}
-
-.schedule-table .freq {
-  font-family: "JetBrains Mono", monospace;
-  font-weight: 600;
-  color: var(--accent-cyan);
-  font-size: 13px;
-}
-
-/* ==============================
    Checklist
    ============================== */
 
@@ -1138,14 +1065,6 @@ body {
     font-size: 2rem;
   }
 
-  .hero-stats {
-    gap: 24px;
-  }
-
-  .hero-stat .num {
-    font-size: 1.6rem;
-  }
-
   .section {
     padding: 60px 20px;
   }
@@ -1184,13 +1103,6 @@ body {
   .checklist-sticky-header {
     margin: -20px -20px 16px;
     padding: 14px 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-stats {
-    flex-direction: column;
-    gap: 20px;
   }
 }
 
