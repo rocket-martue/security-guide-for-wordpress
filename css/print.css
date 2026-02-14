@@ -2,6 +2,7 @@
    Print Styles
    ============================== */
 @media print {
+
   *,
   *::before,
   *::after {
@@ -16,18 +17,13 @@
     line-height: 1.6;
   }
 
-  /* Hide navigation & interactive elements */
+  /* Hide navigation & interactive/decorative elements */
   .nav,
-  .mobile-menu,
-  .hero__bg,
-  .hero__icon,
-  .card__action-number,
+  .hero-grid,
+  .hero-badge,
+  .section-divider,
   .footer {
     display: none !important;
-  }
-
-  .main {
-    padding-top: 0;
   }
 
   /* Page breaks */
@@ -40,62 +36,67 @@
     page-break-before: auto;
   }
 
-  .card,
-  .accordion,
-  .checklist-group {
+  .principle-card,
+  .action-card,
+  .myth-card,
+  .trouble-card,
+  .checklist-category {
     page-break-inside: avoid;
   }
 
   /* Hero for print */
   .hero {
+    min-height: auto;
     padding: 40px 0;
     text-align: left;
   }
 
-  .hero__title {
+  .hero h1 {
     font-size: 24pt;
     -webkit-text-fill-color: #000;
   }
 
-  .hero__title-accent {
+  .hero h1 .gradient-text {
     -webkit-text-fill-color: #000;
   }
 
-  .hero__stats {
+  .hero-stats {
     justify-content: flex-start;
   }
 
   /* Section titles */
-  .section__title {
+  .section h2 {
     font-size: 18pt;
-    -webkit-text-fill-color: #000;
     border-bottom: 2px solid #000;
     padding-bottom: 8px;
   }
 
-  /* Cards */
-  .card {
+  .section-label {
+    display: none;
+  }
+
+  /* Cards & content */
+  .principle-card,
+  .myth-card,
+  .action-card,
+  .trouble-card {
     border: 1px solid #ccc;
     padding: 16px;
     margin-bottom: 16px;
   }
 
-  /* Accordion: show all content when printing */
-  .accordion__content {
-    grid-template-rows: 1fr !important;
-  }
-
-  .accordion__inner {
-    padding: 0 16px 16px !important;
+  /* Troubleshooting: show all content when printing */
+  .trouble-body {
+    max-height: none !important;
     overflow: visible !important;
   }
 
-  .accordion__icon {
+  .trouble-toggle {
     display: none;
   }
 
   /* Checklist */
-  .checklist-item__box {
+  .check-box {
     border: 2px solid #000;
     width: 18px;
     height: 18px;
@@ -103,11 +104,16 @@
     -webkit-print-color-adjust: exact;
   }
 
-  .checklist-item__input:checked ~ .checklist-item__box {
+  .check-item.checked .check-box {
     background: #000 !important;
   }
 
-  .progress {
+  .checklist-progress,
+  .checklist-sticky-header {
+    position: static;
+  }
+
+  .checklist-progress {
     display: none;
   }
 
@@ -118,13 +124,11 @@
     color: #666 !important;
   }
 
-  .resources__link svg,
-  .nav__logo-icon {
-    display: none;
-  }
-
   /* Highlight boxes */
-  .highlight {
+  .action-tip,
+  .action-warn,
+  .callout,
+  .myth-recommend {
     border-left: 3px solid #000;
     padding: 12px 16px;
   }
@@ -138,5 +142,11 @@
   .schedule-table td {
     border: 1px solid #ccc;
     padding: 8px;
+  }
+
+  /* Animations: disable */
+  .animate-in {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
