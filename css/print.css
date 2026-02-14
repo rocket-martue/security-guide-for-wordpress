@@ -1,0 +1,142 @@
+/* ==============================
+   Print Styles
+   ============================== */
+@media print {
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+
+  /* Hide navigation & interactive elements */
+  .nav,
+  .mobile-menu,
+  .hero__bg,
+  .hero__icon,
+  .card__action-number,
+  .footer {
+    display: none !important;
+  }
+
+  .main {
+    padding-top: 0;
+  }
+
+  /* Page breaks */
+  .section {
+    page-break-before: always;
+    padding: 20px 0;
+  }
+
+  .section:first-of-type {
+    page-break-before: auto;
+  }
+
+  .card,
+  .accordion,
+  .checklist-group {
+    page-break-inside: avoid;
+  }
+
+  /* Hero for print */
+  .hero {
+    padding: 40px 0;
+    text-align: left;
+  }
+
+  .hero__title {
+    font-size: 24pt;
+    -webkit-text-fill-color: #000;
+  }
+
+  .hero__title-accent {
+    -webkit-text-fill-color: #000;
+  }
+
+  .hero__stats {
+    justify-content: flex-start;
+  }
+
+  /* Section titles */
+  .section__title {
+    font-size: 18pt;
+    -webkit-text-fill-color: #000;
+    border-bottom: 2px solid #000;
+    padding-bottom: 8px;
+  }
+
+  /* Cards */
+  .card {
+    border: 1px solid #ccc;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  /* Accordion: show all content when printing */
+  .accordion__content {
+    grid-template-rows: 1fr !important;
+  }
+
+  .accordion__inner {
+    padding: 0 16px 16px !important;
+    overflow: visible !important;
+  }
+
+  .accordion__icon {
+    display: none;
+  }
+
+  /* Checklist */
+  .checklist-item__box {
+    border: 2px solid #000;
+    width: 18px;
+    height: 18px;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .checklist-item__input:checked ~ .checklist-item__box {
+    background: #000 !important;
+  }
+
+  .progress {
+    display: none;
+  }
+
+  /* Links */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666 !important;
+  }
+
+  .resources__link svg,
+  .nav__logo-icon {
+    display: none;
+  }
+
+  /* Highlight boxes */
+  .highlight {
+    border-left: 3px solid #000;
+    padding: 12px 16px;
+  }
+
+  /* Table */
+  .schedule-table {
+    border: 1px solid #ccc;
+  }
+
+  .schedule-table th,
+  .schedule-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+  }
+}

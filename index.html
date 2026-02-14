@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WordPress セキュリティガイド｜初心者向けセキュリティ対策</title>
+  <meta name="description" content="初心者でも今日から実践できるWordPressセキュリティ対策。5つの基本を学びましょう。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/print.css" media="print">
+</head>
+<body>
+
+  <!-- ==============================
+       ナビゲーション
+       ============================== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#home">
+        <svg class="nav__logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <span>WP Security</span>
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a class="nav__link is-active" href="#home" data-section="home">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>ホーム</span>
+        </a>
+        <a class="nav__link" href="#basics" data-section="basics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12,2 2,7 12,12 22,7 12,2"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg>
+          <span>基本原則</span>
+        </a>
+        <a class="nav__link" href="#myths" data-section="myths">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>よくある誤解</span>
+        </a>
+        <a class="nav__link" href="#actions" data-section="actions">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <span>5つの対策</span>
+        </a>
+        <a class="nav__link" href="#troubleshooting" data-section="troubleshooting">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          <span>トラブル対処</span>
+        </a>
+        <a class="nav__link" href="#checklist" data-section="checklist">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20,6 9,17 4,12"/></svg>
+          <span>チェックリスト</span>
+        </a>
+        <a class="nav__link" href="#resources" data-section="resources">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          <span>参考資料</span>
+        </a>
+      </div>
+
+      <button class="nav__mobile-btn" id="mobileMenuBtn" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobileMenu">
+        <svg class="nav__mobile-icon nav__mobile-icon--menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        <svg class="nav__mobile-icon nav__mobile-icon--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- モバイルメニュー -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a class="mobile-menu__link" href="#home">ホーム</a>
+    <a class="mobile-menu__link" href="#basics">基本原則</a>
+    <a class="mobile-menu__link" href="#myths">よくある誤解</a>
+    <a class="mobile-menu__link" href="#actions">5つの対策</a>
+    <a class="mobile-menu__link" href="#troubleshooting">トラブル対処</a>
+    <a class="mobile-menu__link" href="#checklist">チェックリスト</a>
+    <a class="mobile-menu__link" href="#resources">参考資料</a>
+  </div>
+
+  <main class="main">
+
+    <!-- ==============================
+         ヒーローセクション
+         ============================== -->
+    <section id="home" class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__content">
+        <div class="hero__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h1 class="hero__title">
+          WordPress<br>
+          <span class="hero__title-accent">セキュリティガイド</span>
+        </h1>
+        <p class="hero__description">
+          初心者でも今日から実践できるセキュリティ対策。<br>
+          あなたのサイトを守るための5つの基本を学びましょう。
+        </p>
+        <div class="hero__stats">
+          <div class="hero__stat">
+            <div class="hero__stat-value">42%</div>
+            <div class="hero__stat-label">脆弱なサイトの割合</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">50%</div>
+            <div class="hero__stat-label">最新版を使用</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-value">5</div>
+            <div class="hero__stat-label">今日から実践できる対策</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション1：セキュリティの基本原則
+         ============================== -->
+    <section id="basics" class="section">
+      <h2 class="section__title">セキュリティの基本原則</h2>
+      <p class="section__subtitle">「完璧に安全なシステム」は存在しません。実用的かつ運用可能な範囲でリスクを減らすことが目標です。</p>
+
+      <div class="principles">
+        <div class="principle">
+          <div class="principle__number">1</div>
+          <h3 class="principle__title">アクセスの制限</h3>
+          <p class="principle__desc">悪意ある人物が利用可能な入り口を減らす。不要なプラグイン削除、ログイン試行制限などが有効。</p>
+        </div>
+        <div class="principle">
+          <div class="principle__number">2</div>
+          <h3 class="principle__title">被害の抑制</h3>
+          <p class="principle__desc">攻撃が成功した場合の損害を最小化する。権限管理とバックアップが重要。</p>
+        </div>
+        <div class="principle">
+          <div class="principle__number">3</div>
+          <h3 class="principle__title">状況の把握</h3>
+          <p class="principle__desc">バックアップを取り、変更を記録し、状態を把握する。アクティビティログの活用。</p>
+        </div>
+        <div class="principle">
+          <div class="principle__number">4</div>
+          <h3 class="principle__title">信頼できるソース</h3>
+          <p class="principle__desc">テーマやプラグインは公式レポジトリや信頼できる提供元から入手する。</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 40px;">
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12,2 2,7 12,12 22,7 12,2"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg>
+          </div>
+          <h3 class="card__title">多層防御の重要性</h3>
+        </div>
+        <div class="card__body">
+          <p>単一の対策に依存せず、複数の対策を組み合わせることが重要です。1つの防御が破られても、次の防御で守れるようにしましょう。</p>
+          <div class="highlight highlight--info">
+            💡 城の防御を思い浮かべてください。外堀、内堀、城壁、門、天守閣…1つが破られても、次の防御があります。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション2：よくある誤解を解く
+         ============================== -->
+    <section id="myths" class="section">
+      <h2 class="section__title">よくある誤解を解く</h2>
+      <p class="section__subtitle">セキュリティ対策には効果的なものとそうでないものがあります。</p>
+
+      <div class="card card--warning">
+        <div class="myth-header">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          <span>誤解：ログインURLを変更すれば安全</span>
+        </div>
+        <div class="card__body">
+          <p>ログインURLの変更は一見効果的に見えますが、以下のデメリットがあります：</p>
+          <ul class="check-list check-list--warning">
+            <li><strong>アクセス性の低下：</strong> 複数サイト管理時の混乱、チーム共有の困難</li>
+            <li><strong>互換性の問題：</strong> 他のプラグインやテーマとの競合リスク</li>
+            <li><strong>パスワードリセットの複雑化：</strong> 標準機能との整合性問題</li>
+            <li><strong>過信の危険：</strong> 単一対策への依存、他の重要な対策を軽視しがち</li>
+          </ul>
+          <div class="highlight highlight--success">
+            ✅ <strong>推奨：</strong> ログインURL変更よりも、2要素認証＋ログイン試行制限の方が効果的です。
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12,2 2,7 12,12 22,7 12,2"/><polyline points="2,17 12,22 22,17"/><polyline points="2,12 12,17 22,12"/></svg>
+          </div>
+          <h3 class="card__title">「最小構成で最大効果」の考え方</h3>
+        </div>
+        <div class="card__body">
+          <p>プラグインは多ければ良いわけではありません。過剰なプラグインは以下の問題を招きます：</p>
+          <ul class="check-list">
+            <li>サイト表示速度の低下</li>
+            <li>プラグイン同士の干渉による不具合</li>
+            <li>メンテナンス負担の増加</li>
+            <li>脆弱性リスクの増加</li>
+          </ul>
+          <div class="highlight highlight--warning">
+            💡 <strong>判断基準：</strong>「このプラグインを削除したら、サイトが困るか？」YESなら残す、NOなら削除。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション3：今日から実践できる5つの対策
+         ============================== -->
+    <section id="actions" class="section">
+      <h2 class="section__title">今日から実践できる5つの対策</h2>
+      <p class="section__subtitle">優先度の高い順に、今すぐ始められる対策を紹介します。</p>
+
+      <!-- 対策1 -->
+      <div class="card card--action">
+        <div class="card__action-number" aria-hidden="true">1</div>
+        <div class="card__badge card__badge--priority">最優先</div>
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23,4 23,10 17,10"/><polyline points="1,20 1,14 7,14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></svg>
+          </div>
+          <h3 class="card__title">最新バージョンにアップデート</h3>
+        </div>
+        <div class="card__body">
+          <div class="highlight highlight--danger">
+            ⚠️ Patchstack社の2024年調査によると、WordPressサイトの<strong>42%</strong>に少なくとも1つの脆弱なソフトウェアがインストールされています。
+          </div>
+          <p><strong>更新の対象：</strong></p>
+          <ul class="check-list">
+            <li><strong>WordPressコア：</strong> マイナーアップデートは自動更新（推奨）</li>
+            <li><strong>プラグイン：</strong> 月1回の確認・手動更新推奨</li>
+            <li><strong>テーマ：</strong> 月1回の確認・手動更新推奨</li>
+            <li>使っていないプラグイン・テーマは削除する</li>
+          </ul>
+          <div class="highlight highlight--info">
+            💡 <strong>重要：</strong> 更新前には必ずバックアップを取得！
+          </div>
+        </div>
+      </div>
+
+      <!-- 対策2 -->
+      <div class="card card--action">
+        <div class="card__action-number" aria-hidden="true">2</div>
+        <div class="card__badge card__badge--required">必須</div>
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3 class="card__title">バックアップは必ず取る</h3>
+        </div>
+        <div class="card__body">
+          <p>バックアップは「最後の砦」です。どんな対策をしても100%安全はありえません。マルウェア感染、サーバー障害、人的ミスなど、あらゆる危機から復旧できる唯一の手段です。</p>
+          <h4>3-2-1ルール</h4>
+          <ul class="check-list">
+            <li><strong>3</strong>つのコピーを保持</li>
+            <li><strong>2</strong>つの異なるメディアに保存（サーバー + クラウドなど）</li>
+            <li><strong>1</strong>つはオフサイト（別の場所）に保管</li>
+          </ul>
+          <div class="highlight highlight--success">
+            ✅ <strong>推奨プラグイン：</strong><br>
+            ・WPvivid Backup Plugin（初心者向け、復元が簡単、日本語対応）<br>
+            ・UpdraftPlus（多機能、クラウド連携が豊富）
+          </div>
+        </div>
+      </div>
+
+      <!-- 対策3 -->
+      <div class="card card--action">
+        <div class="card__action-number" aria-hidden="true">3</div>
+        <div class="card__badge card__badge--basic">基本</div>
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+          </div>
+          <h3 class="card__title">強力なパスワードを使う</h3>
+        </div>
+        <div class="card__body">
+          <p><strong>避けるべきユーザー名：</strong></p>
+          <ul class="check-list check-list--warning">
+            <li>admin（最も狙われる）</li>
+            <li>webmaster</li>
+            <li>サイト名</li>
+            <li>自分の名前</li>
+          </ul>
+          <div class="highlight highlight--warning">
+            💡 <strong>パスワードは「覚えない」ことが重要</strong><br>
+            人間が覚えられるパスワード＝コンピューターにも推測されやすい。WordPressの自動生成パスワードをそのまま使用しましょう。
+          </div>
+          <p><strong>パスワード管理ツールを活用：</strong></p>
+          <ul class="check-list">
+            <li>Googleパスワードマネージャー（導入コスト最小）</li>
+            <li>1Password、Bitwarden、LastPass など</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 対策4 -->
+      <div class="card card--action">
+        <div class="card__action-number" aria-hidden="true">4</div>
+        <div class="card__badge card__badge--recommended">推奨</div>
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="card__title">セキュリティプラグインの導入</h3>
+        </div>
+        <div class="card__body">
+          <p><strong>推奨：Wordfence Security</strong></p>
+          <ul class="check-list">
+            <li><strong>WAF（Web Application Firewall）：</strong> 攻撃通信を事前にブロック</li>
+            <li><strong>マルウェアスキャン：</strong> 悪意のあるコードを定期的に検出</li>
+            <li><strong>ブルートフォース攻撃対策：</strong> ログイン試行制限（1時間に3〜5回が目安）</li>
+            <li><strong>2要素認証機能：</strong> Wordfence内蔵の2FA機能が利用可能</li>
+            <li>日本語対応あり、無料版でも十分な機能</li>
+          </ul>
+          <div class="highlight highlight--warning">
+            ⚠️ <strong>プラグインの重複に注意：</strong>
+            Wordfenceには2FA機能が内蔵されています。別途WP 2FAを導入する場合は機能が重複するため、どちらか一方を使用することをお勧めします。
+          </div>
+        </div>
+      </div>
+
+      <!-- 対策5 -->
+      <div class="card card--action">
+        <div class="card__action-number" aria-hidden="true">5</div>
+        <div class="card__badge card__badge--continuous">継続</div>
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 class="card__title">ユーザー管理とアクセス制御</h3>
+        </div>
+        <div class="card__body">
+          <ul class="check-list">
+            <li>各ユーザーには業務に必要な<strong>最低限の権限のみ</strong>を付与</li>
+            <li>管理者権限は必要最小限の人数に制限</li>
+            <li><strong>1人1アカウントの原則を徹底</strong>（共用アカウント禁止）</li>
+            <li>定期的にユーザーリストと権限を見直し</li>
+          </ul>
+          <div class="highlight highlight--info">
+            💡 退職した社員のアカウントから不正アクセスされた事例もあります。退職者アカウントは即削除しましょう。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション4：トラブル対処法
+         ============================== -->
+    <section id="troubleshooting" class="section">
+      <h2 class="section__title">トラブル対処法</h2>
+      <p class="section__subtitle">よくあるトラブルとその解決方法を紹介します。</p>
+
+      <!-- ケース1 -->
+      <div class="accordion" data-accordion>
+        <button class="accordion__header" aria-expanded="false">
+          <span>ケース1：プラグイン更新後に画面が真っ白になった</span>
+          <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="accordion__content" aria-hidden="true">
+          <div class="accordion__inner">
+            <h4>症状</h4>
+            <ul>
+              <li>管理画面や公開ページが真っ白</li>
+              <li>エラーメッセージが表示されない</li>
+              <li>WordPressにアクセスできない</li>
+            </ul>
+            <h4>対処法</h4>
+            <ol>
+              <li>FTPまたはファイルマネージャでサーバーに接続</li>
+              <li><code>/wp-content/plugins/</code> ディレクトリにアクセス</li>
+              <li>問題のプラグインフォルダ名を変更（例：plugin → _plugin）</li>
+              <li>管理画面にアクセスできるか確認</li>
+              <li>それでも解決しない場合はバックアップから復元</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ケース2 -->
+      <div class="accordion" data-accordion>
+        <button class="accordion__header" aria-expanded="false">
+          <span>ケース2：自分のIPアドレスがロックアウトされた</span>
+          <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="accordion__content" aria-hidden="true">
+          <div class="accordion__inner">
+            <h4>症状</h4>
+            <ul>
+              <li>ログイン画面にアクセスできない</li>
+              <li>「IPアドレスがブロックされています」と表示される</li>
+              <li>パスワードは正しいのにログインできない</li>
+            </ul>
+            <h4>対処法</h4>
+            <ol>
+              <li><strong>方法1：</strong> スマートフォンの4G/5G回線など、別のネットワークからアクセスを試みる</li>
+              <li><strong>方法2：</strong> FTPでセキュリティプラグインのフォルダ名を変更して一時的に無効化</li>
+              <li><strong>方法3：</strong> ホスティング会社のサポートに連絡してIPブロックを解除</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ケース3 -->
+      <div class="accordion" data-accordion>
+        <button class="accordion__header" aria-expanded="false">
+          <span>ケース3：ログインURLを忘れた</span>
+          <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="accordion__content" aria-hidden="true">
+          <div class="accordion__inner">
+            <h4>対処法</h4>
+            <ol>
+              <li>まずデフォルトURLを試す：<code>/wp-login.php</code> または <code>/wp-admin/</code></li>
+              <li>FTPでサーバーに接続</li>
+              <li><code>/wp-content/plugins/</code> ディレクトリにアクセス</li>
+              <li>URL変更プラグインのフォルダ名を変更（例：wps-hide-login → _wps-hide-login）</li>
+              <li>デフォルトURL（<code>/wp-login.php</code>）でログイン</li>
+              <li>プラグインのフォルダ名を元に戻し、再設定</li>
+            </ol>
+            <div class="highlight highlight--info">
+              💡 今後の対策として、カスタムURLをパスワード管理ツールに保存しておきましょう。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ケース4 -->
+      <div class="accordion" data-accordion>
+        <button class="accordion__header" aria-expanded="false">
+          <span>ケース4：バックアップから復元できない</span>
+          <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="accordion__content" aria-hidden="true">
+          <div class="accordion__inner">
+            <h4>対処法</h4>
+            <ol>
+              <li>バックアップファイルが存在するか、サイズが適切か確認</li>
+              <li>データベースとファイルの両方があるか確認</li>
+              <li>使用しているバックアッププラグインの公式ドキュメントを確認</li>
+              <li>手動復元を試みる（FTPでファイルアップロード、phpMyAdminでDBインポート）</li>
+              <li>ホスティング会社のサポートに連絡</li>
+              <li>必要に応じてWordPress専門家に依頼</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <!-- ケース5 -->
+      <div class="accordion" data-accordion>
+        <button class="accordion__header" aria-expanded="false">
+          <span>ケース5：サイトが改ざんされた・マルウェア感染</span>
+          <svg class="accordion__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="accordion__content" aria-hidden="true">
+          <div class="accordion__inner">
+            <h4>緊急対応手順</h4>
+            <ol>
+              <li><strong>サイトをメンテナンスモードに：</strong> 被害拡大を防ぐ</li>
+              <li><strong>すべてのパスワードを変更：</strong> WordPress、FTP、データベース、ホスティング</li>
+              <li><strong>マルウェアスキャンを実行：</strong> Wordfenceなどで感染ファイルを特定</li>
+              <li><strong>クリーンなバックアップから復元：</strong> 最新のクリーンなバックアップを使用</li>
+              <li><strong>再発防止策を実施：</strong> 全ソフトウェアを最新に、セキュリティ強化</li>
+              <li><strong>専門家に相談：</strong> 自力で解決できない場合は必ず相談</li>
+            </ol>
+            <div class="highlight highlight--danger">
+              🔴 パニックにならず、冷静に対処しましょう。記録を取りながら作業を進めてください。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 継続的な運用スケジュール -->
+      <div class="card" style="margin-top: 32px;">
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+          </div>
+          <h3 class="card__title">継続的な運用スケジュール</h3>
+        </div>
+        <div class="card__body">
+          <div class="schedule-table-wrapper">
+            <table class="schedule-table">
+              <thead>
+                <tr>
+                  <th>頻度</th>
+                  <th>実施項目</th>
+                  <th>所要時間</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge badge--weekly">毎週</span></td>
+                  <td>WordPress・プラグイン・テーマの更新確認<br>セキュリティアラート通知の確認</td>
+                  <td>約5分</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge--monthly">毎月</span></td>
+                  <td>バックアップの復元テスト<br>不要なアカウントの削除<br>パスワードの変更（ポリシーによる）</td>
+                  <td>約30分</td>
+                </tr>
+                <tr>
+                  <td><span class="badge badge--quarterly">3ヶ月ごと</span></td>
+                  <td>導入プラグインの見直し<br>セキュリティ設定の確認<br>簡易セキュリティ診断</td>
+                  <td>1〜2時間</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション5：チェックリスト
+         ============================== -->
+    <section id="checklist" class="section">
+      <h2 class="section__title">セキュリティチェックリスト</h2>
+      <p class="section__subtitle">対策の進捗を管理しましょう。完了したら項目をチェックしてください。</p>
+
+      <!-- Phase 1 -->
+      <div class="checklist-phase">
+        <div class="checklist-phase__header">
+          <h3 class="checklist-phase__title">Phase 1：今すぐ実施（必須対策）</h3>
+          <span class="checklist-phase__badge checklist-phase__badge--urgent">🔴 緊急</span>
+        </div>
+        <div class="progress" id="progressPhase1">
+          <div class="progress__bar">
+            <div class="progress__fill" style="width: 0%"></div>
+          </div>
+          <span class="progress__text">0 / 11 完了</span>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">アップデートとクリーンアップ</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="updateCore">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">WordPress本体を最新版に更新</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="updatePlugins">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">すべてのプラグインを最新版に更新</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="updateThemes">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">すべてのテーマを最新版に更新</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="removeUnusedPlugins">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">不要なプラグインを削除（無効化ではなく削除）</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="removeUnusedThemes">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">不要なテーマを削除</span>
+          </label>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">アカウント・パスワード</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="deleteAdmin">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">adminユーザーを削除（新規管理者を作成後）</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="strongPassword">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">パスワードを12文字以上の複雑なものに変更</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="checkUsername">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">推測されやすいユーザー名を使用していないか確認</span>
+          </label>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">バックアップ</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="setupBackup">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">自動バックアップシステムを設定</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="externalStorage">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">バックアップの保存先を外部ストレージに設定</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="1" name="testRestore">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">バックアップからの復元テストを実施</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Phase 2 -->
+      <div class="checklist-phase">
+        <div class="checklist-phase__header">
+          <h3 class="checklist-phase__title">Phase 2：1週間以内に実施（強化対策）</h3>
+          <span class="checklist-phase__badge checklist-phase__badge--week">🟡 1週間以内</span>
+        </div>
+        <div class="progress" id="progressPhase2">
+          <div class="progress__bar">
+            <div class="progress__fill" style="width: 0%"></div>
+          </div>
+          <span class="progress__text">0 / 10 完了</span>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">セキュリティプラグイン</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="installWordfence">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">Wordfence Security を導入</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="enableWAF">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">WAF（Web Application Firewall）を有効化</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="setupMalwareScan">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">マルウェアスキャンを設定</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="loginLimit">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">ログイン試行回数制限を設定（1時間に3〜5回が目安）</span>
+          </label>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">認証強化</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="setup2FA">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">2要素認証（2FA）を導入</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="admin2FA">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">すべての管理者アカウントに2FAを適用</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="backupCodes">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">バックアップコードを安全に保管</span>
+          </label>
+        </div>
+
+        <div class="checklist-group">
+          <h4 class="checklist-group__title">ユーザー管理</h4>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="reviewPermissions">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">各ユーザーの権限を見直し</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="oneAccountPerPerson">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">1人1アカウントの原則を確認</span>
+          </label>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-item__input sr-only" data-phase="2" name="removeOldAccounts">
+            <span class="checklist-item__box" aria-hidden="true"></span>
+            <span class="checklist-item__label">退職者・不要なアカウントを削除</span>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================
+         セクション6：参考資料
+         ============================== -->
+    <section id="resources" class="section">
+      <h2 class="section__title">参考資料</h2>
+      <p class="section__subtitle">さらに詳しく学びたい方のための参考資料です。</p>
+
+      <div class="resources">
+        <div class="resources__category">
+          <h3 class="resources__category-title">公式ドキュメント</h3>
+          <div class="resources__list">
+            <a href="https://ja.wordpress.org/support/article/hardening-wordpress/" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>WordPress の安全性を高める（WordPress.org 日本語版）</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="resources__category">
+          <h3 class="resources__category-title">セキュリティレポート（一次情報源）</h3>
+          <div class="resources__list">
+            <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2024/" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Patchstack - State of WordPress Security 2024</span>
+            </a>
+            <a href="https://www.wordfence.com/wp-content/uploads/2025/04/2024-Annual-WordPress-Security-Report-by-Wordfence.pdf" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Wordfence - 2024 Annual WordPress Security Report</span>
+            </a>
+            <a href="https://sucuri.net/reports/" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>Sucuri - Website Threat Research Reports</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="resources__category">
+          <h3 class="resources__category-title">参考記事</h3>
+          <div class="resources__list">
+            <a href="https://note.com/martue/n/n70fc7290d49a" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>WordPressのログインURLを変更するデメリット</span>
+            </a>
+            <a href="https://note.com/martue/n/nf48f317d1c75" target="_blank" rel="noopener noreferrer" class="resources__link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              <span>WordPressのログインURLを変更する代わりに実装すべき5つのセキュリティ対策</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 40px;">
+        <div class="card__header">
+          <div class="card__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="card__title">重要な3原則</h3>
+        </div>
+        <div class="card__body">
+          <ul class="check-list">
+            <li><strong>バックアップは最後の砦：</strong> どんな対策をしても100%安全はありえません</li>
+            <li><strong>多層防御：</strong> 単一の対策に依存せず、複数の対策を組み合わせましょう</li>
+            <li><strong>継続的な運用：</strong> セキュリティは一度やって終わりではありません</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==============================
+       フッター
+       ============================== -->
+  <footer class="footer">
+    <div class="footer__content">
+      <div class="footer__logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>WordPress Security Guide</span>
+      </div>
+      <p>WordPress セキュリティ Meetup 資料<br>作成日：2026年1月25日</p>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
