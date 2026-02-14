@@ -1,0 +1,201 @@
+// =============================================
+// Variables - WordPress Security Guide
+// =============================================
+
+// ===== Base Colors =====
+// SCSS変数: 計算のベースとして使用
+$white: #ffffff;
+$black: #000000;
+
+// Grays
+$gray-50: #f8fafc;
+$gray-100: #f1f5f9;
+$gray-300: #cbd5e1;
+$gray-400: #94a3b8;
+$gray-600: #475569;
+$gray-900: #0f172a;
+
+// Accent Colors
+$cyan-500: #0891b2;
+$blue-500: #2563eb;
+$green-500: #059669;
+$amber-500: #d97706;
+$red-500: #dc2626;
+$purple-500: #7c3aed;
+
+// ===== Semantic Color Map =====
+// 用途別の色定義
+$colors: (
+	"primary": $cyan-500,
+	"secondary": $blue-500,
+	"success": $green-500,
+	"warning": $amber-500,
+	"danger": $red-500,
+	"info": $purple-500
+);
+
+// ===== Spacing System =====
+// レスポンシブスペーシング (clamp)
+$space-xs: clamp(0.25rem, 0.188rem + 0.25vw, 0.375rem); // 4px-6px
+$space-sm: clamp(0.5rem, 0.375rem + 0.5vw, 0.75rem); // 8px-12px
+$space-md: clamp(1rem, 0.875rem + 0.5vw, 1.25rem); // 16px-20px
+$space-lg: clamp(1.5rem, 1.25rem + 1vw, 2rem); // 24px-32px
+$space-xl: clamp(2rem, 1.75rem + 1vw, 2.5rem); // 32px-40px
+$space-2xl: clamp(3rem, 2.5rem + 2vw, 4rem); // 48px-64px
+$space-3xl: clamp(4rem, 3.5rem + 2vw, 5rem); // 64px-80px
+$space-4xl: clamp(5rem, 4.25rem + 3vw, 6.25rem); // 80px-100px
+$space-5xl: clamp(6.25rem, 5.375rem + 3.5vw, 7.5rem); // 100px-120px
+
+// Spacing Map（ループで使用）
+$spacings: (
+	"xs": $space-xs,
+	"sm": $space-sm,
+	"md": $space-md,
+	"lg": $space-lg,
+	"xl": $space-xl,
+	"2xl": $space-2xl,
+	"3xl": $space-3xl
+);
+
+// ===== Typography =====
+// Font Families
+$font-sans:
+	"Noto Sans JP",
+	-apple-system,
+	BlinkMacSystemFont,
+	"Segoe UI",
+	sans-serif;
+$font-mono: "JetBrains Mono", "Consolas", "Monaco", monospace;
+
+// Font Sizes (Responsive with clamp)
+$text-xs: clamp(0.625rem, 0.563rem + 0.25vw, 0.75rem); // 10px-12px
+$text-sm: clamp(0.75rem, 0.688rem + 0.25vw, 0.875rem); // 12px-14px
+$text-base: clamp(0.875rem, 0.813rem + 0.25vw, 1rem); // 14px-16px
+$text-md: clamp(1rem, 0.938rem + 0.25vw, 1.125rem); // 16px-18px
+$text-lg: clamp(1.125rem, 1.063rem + 0.25vw, 1.25rem); // 18px-20px
+$text-xl: clamp(1.25rem, 1.125rem + 0.5vw, 1.5rem); // 20px-24px
+$text-2xl: clamp(1.375rem, 1.188rem + 0.75vw, 1.75rem); // 22px-28px
+$text-3xl: clamp(1.5rem, 1.25rem + 1vw, 2rem); // 24px-32px
+$text-4xl: clamp(1.625rem, 1.187rem + 1.75vw, 2.5rem); // 26px-40px
+$text-5xl: clamp(1.75rem, 1.125rem + 2.5vw, 3rem); // 28px-48px
+$text-6xl: clamp(1.875rem, 0.812rem + 4.25vw, 4rem); // 30px-64px
+
+// Font Weights
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+$font-semibold: 600;
+$font-bold: 700;
+$font-black: 900;
+
+// Line Heights
+$leading-tight: 1.2;
+$leading-normal: 1.6;
+$leading-relaxed: 1.8;
+$leading-loose: 1.9;
+
+// ===== Border Radius =====
+$radius-sm: 8px;
+$radius-md: 14px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$radius-full: 9999px;
+
+// ===== Shadows =====
+$shadow-xs: 0 1px 2px rgba($black, 0.04);
+$shadow-sm: 0 1px 3px rgba($black, 0.04);
+$shadow-md: 0 4px 12px rgba($black, 0.06);
+$shadow-lg: 0 10px 24px rgba($black, 0.08);
+$glow-cyan: 0 4px 24px rgba($cyan-500, 0.08);
+$glow-blue: 0 4px 24px rgba($blue-500, 0.08);
+
+// ===== Transitions =====
+$transition-fast: 0.15s ease;
+$transition-base: 0.2s ease;
+$transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: 0.6s ease-out;
+
+// ===== Breakpoints =====
+$breakpoint-mobile: 768px;
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
+$breakpoint-2xl: 1536px;
+
+// Breakpoints Map（ミックスインで使用）
+$breakpoints: (
+	"mobile": $breakpoint-mobile,
+	"sm": $breakpoint-sm,
+	"md": $breakpoint-md,
+	"lg": $breakpoint-lg,
+	"xl": $breakpoint-xl,
+	"2xl": $breakpoint-2xl
+);
+
+// ===== Z-Index Scale =====
+$z-base: 1;
+$z-dropdown: 10;
+$z-sticky: 20;
+$z-fixed: 30;
+$z-modal-backdrop: 40;
+$z-modal: 50;
+$z-popover: 60;
+$z-tooltip: 70;
+
+// ===== Container Max Width =====
+$container-sm: 640px;
+$container-md: 768px;
+$container-lg: 1000px;
+$container-xl: 1200px;
+
+// ===== CSS Custom Properties 出力 =====
+// ランタイムで変更可能にする値のみ
+:root {
+	// Backgrounds（テーマで変更可能にする）
+	--bg-primary: #{$white};
+	--bg-secondary: #{$gray-50};
+	--bg-card: #{$white};
+	--bg-card-hover: #{$gray-50};
+
+	// Text Colors
+	--text-primary: #{$gray-900};
+	--text-secondary: #{$gray-600};
+	--text-muted: #{$gray-400};
+
+	// Font Sizes (Responsive)
+	--font-size-xs: #{$text-xs};
+	--font-size-sm: #{$text-sm};
+	--font-size-base: #{$text-base};
+	--font-size-md: #{$text-md};
+	--font-size-lg: #{$text-lg};
+	--font-size-xl: #{$text-xl};
+	--font-size-2xl: #{$text-2xl};
+	--font-size-3xl: #{$text-3xl};
+	--font-size-4xl: #{$text-4xl};
+	--font-size-5xl: #{$text-5xl};
+	--font-size-6xl: #{$text-6xl};
+
+	// Spacing (Responsive)
+	--space-xs: #{$space-xs};
+	--space-sm: #{$space-sm};
+	--space-md: #{$space-md};
+	--space-lg: #{$space-lg};
+	--space-xl: #{$space-xl};
+	--space-2xl: #{$space-2xl};
+	--space-3xl: #{$space-3xl};
+	--space-4xl: #{$space-4xl};
+	--space-5xl: #{$space-5xl};
+
+	// Borders
+	--border-subtle: rgba(15, 23, 42, 0.08);
+	--border-accent: rgba(8, 145, 178, 0.25);
+
+	// Accents
+	--accent-cyan: #{$cyan-500};
+	--accent-blue: #{$blue-500};
+	--accent-green: #{$green-500};
+	--accent-amber: #{$amber-500};
+	--accent-red: #{$red-500};
+	--accent-purple: #{$purple-500};
+}

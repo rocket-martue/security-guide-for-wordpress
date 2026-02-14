@@ -1,0 +1,320 @@
+// =============================================
+// Cards - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/functions' as *;
+@use '../abstracts/mixins' as *;
+@use '../abstracts/placeholders' as *;
+
+// ===== Principles Grid & Card =====
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-md;
+  margin-bottom: $space-xl;
+}
+
+.principle-card {
+  @extend %card-base;
+  padding: spacing(1.75);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+    opacity: 0;
+    transition: opacity $transition-smooth;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+.principle-num {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: $font-semibold;
+  color: var(--accent-cyan);
+  background: rgba($cyan-500, 0.08);
+  width: 28px;
+  height: 28px;
+  border-radius: $radius-sm;
+  @include flex-center;
+  margin-bottom: $space-md;
+}
+
+.principle-card h3 {
+  font-size: $text-lg;
+  font-weight: $font-bold;
+  margin-bottom: 10px;
+}
+
+.principle-card p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: $leading-relaxed;
+}
+
+// Callout Box
+.callout {
+  background: linear-gradient(135deg, rgba($cyan-500, 0.04), rgba($blue-500, 0.04));
+  border: 1px solid rgba($cyan-500, 0.15);
+  border-radius: $radius-md;
+  padding: $space-lg spacing(1.75);
+  margin-top: $space-md;
+
+  &-title {
+    font-size: 14px;
+    font-weight: $font-bold;
+    color: var(--accent-cyan);
+    margin-bottom: $space-sm;
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+  }
+
+  p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: $leading-relaxed;
+  }
+}
+
+// ===== Myth Card =====
+.myth-card {
+  @extend %card-base;
+  padding: spacing(2.25);
+  margin-bottom: $space-lg;
+  border-radius: $radius-lg;
+}
+
+.myth-label {
+  @include badge($red-500);
+  margin-bottom: $space-md;
+}
+
+.myth-card h3 {
+  font-size: $text-xl;
+  font-weight: $font-bold;
+  margin-bottom: $space-md;
+}
+
+.myth-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.myth-card li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+
+  &::before {
+    content: "\00d7";
+    position: absolute;
+    left: 0;
+    color: var(--accent-red);
+    font-weight: $font-bold;
+    font-size: $text-base;
+  }
+}
+
+.myth-recommend {
+  margin-top: $space-lg;
+  padding: $space-md $space-lg;
+  background: rgba($green-500, 0.05);
+  border: 1px solid rgba($green-500, 0.18);
+  border-radius: $radius-sm;
+  color: var(--accent-green);
+  font-size: 14px;
+  font-weight: $font-semibold;
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+}
+
+// ===== Action Card =====
+.action-card {
+  @include card-base;
+  padding: 0;
+  margin-bottom: $space-lg;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  &:hover {
+    border-color: var(--border-accent);
+    box-shadow: $glow-blue;
+  }
+}
+
+.action-header {
+  display: flex;
+  align-items: center;
+  gap: $space-lg;
+  padding: spacing(1.75) spacing(2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.action-number {
+  font-family: $font-mono;
+  font-size: $text-2xl;
+  font-weight: $font-semibold;
+  color: var(--accent-cyan);
+  min-width: 48px;
+  height: 48px;
+  background: rgba($cyan-500, 0.06);
+  border-radius: $radius-md;
+  @include flex-center;
+}
+
+.action-meta {
+  flex: 1;
+
+  h3 {
+    font-size: $text-xl;
+    font-weight: $font-bold;
+    margin-bottom: 2px;
+  }
+}
+
+.action-priority {
+  font-size: $text-xs;
+  font-weight: $font-bold;
+  letter-spacing: 0.08em;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+
+// Priority Modifiers
+.priority-critical {
+  background: rgba($red-500, 0.08);
+  color: var(--accent-red);
+}
+
+.priority-required {
+  background: rgba($amber-500, 0.08);
+  color: var(--accent-amber);
+}
+
+.priority-basic {
+  background: rgba($cyan-500, 0.08);
+  color: var(--accent-cyan);
+}
+
+.priority-recommended {
+  background: rgba($green-500, 0.08);
+  color: var(--accent-green);
+}
+
+.priority-ongoing {
+  background: rgba($purple-500, 0.08);
+  color: var(--accent-purple);
+}
+
+.action-body {
+  padding: spacing(1.75) spacing(2);
+
+  p,
+  li {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: $leading-loose;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: $space-sm;
+
+    &::before {
+      content: "\2192";
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+      font-weight: $font-bold;
+    }
+  }
+
+  strong {
+    color: var(--text-primary);
+  }
+}
+
+.action-tip {
+  margin-top: $space-lg;
+  padding: $space-md $space-lg;
+  background: rgba($cyan-500, 0.04);
+  border-left: 3px solid var(--accent-cyan);
+  border-radius: 0 $radius-sm $radius-sm 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+
+  em {
+    color: var(--accent-cyan);
+    font-style: normal;
+    font-weight: $font-semibold;
+  }
+}
+
+.action-warn {
+  margin-top: $space-lg;
+  padding: $space-md $space-lg;
+  background: rgba($amber-500, 0.04);
+  border-left: 3px solid var(--accent-amber);
+  border-radius: 0 $radius-sm $radius-sm 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+}
+
+// ===== Resource Card =====
+.resources-grid {
+  @include grid-auto-fit(300px, $space-md);
+}
+
+.resource-card {
+  @extend %card-base;
+  padding: $space-lg;
+
+  h4 {
+    font-size: $text-sm;
+    font-weight: $font-bold;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    margin-bottom: $space-md;
+  }
+}
+
+.resource-link {
+  display: block;
+  color: var(--accent-cyan);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: $font-medium;
+  padding: $space-sm 0;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: color $transition-base, padding-left $transition-base;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    color: var(--text-primary);
+    padding-left: $space-sm;
+  }
+}

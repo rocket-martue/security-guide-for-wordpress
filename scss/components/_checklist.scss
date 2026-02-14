@@ -1,0 +1,163 @@
+// =============================================
+// Checklist - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ===== Checklist Phase =====
+.checklist-phase {
+  @include card-base;
+  padding: $space-xl;
+  margin-bottom: $space-lg;
+}
+
+// Sticky Header
+.checklist-sticky-header {
+  position: sticky;
+  top: 64px;
+  z-index: $z-sticky;
+  background: var(--bg-card);
+  padding: $space-md $space-xl;
+  margin: (-$space-xl) (-$space-xl) $space-lg;
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: $radius-lg $radius-lg 0 0;
+  transition: box-shadow $transition-smooth;
+
+  &.stuck {
+    box-shadow: $shadow-md;
+  }
+
+  .checklist-phase-header {
+    margin-bottom: $space-md;
+  }
+
+  .checklist-progress {
+    margin-bottom: 0;
+  }
+}
+
+.checklist-phase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: $space-lg;
+
+  h3 {
+    font-size: $text-lg;
+    font-weight: $font-bold;
+  }
+}
+
+.phase-badge {
+  font-size: $text-xs;
+  font-weight: $font-bold;
+  padding: 4px 12px;
+  border-radius: 6px;
+
+  &.urgent {
+    background: rgba($red-500, 0.08);
+    color: var(--accent-red);
+  }
+
+  &.soon {
+    background: rgba($amber-500, 0.08);
+    color: var(--accent-amber);
+  }
+}
+
+// Progress Bar
+.checklist-progress {
+  height: 4px;
+  background: rgba($gray-900, 0.06);
+  border-radius: 2px;
+  margin-bottom: $space-lg;
+  overflow: hidden;
+
+  &-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.5s;
+  }
+}
+
+// Category
+.checklist-category {
+  margin-bottom: $space-md;
+
+  h4 {
+    font-size: $text-xs;
+    font-weight: $font-bold;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: $space-md;
+  }
+}
+
+// Check Item
+.check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-md;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background $transition-base;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: rgba($gray-900, 0.02);
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  &.checked {
+    .check-box {
+      border-color: var(--accent-green);
+      background: var(--accent-green);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    .check-label {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+  }
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--text-muted);
+  border-radius: 5px;
+  flex-shrink: 0;
+  @include flex-center;
+  transition: all $transition-base;
+  margin-top: 1px;
+
+  &::after {
+    content: "\2713";
+    font-size: $text-xs;
+    font-weight: $font-black;
+    color: $white;
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+}
+
+.check-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  transition: color $transition-base;
+}

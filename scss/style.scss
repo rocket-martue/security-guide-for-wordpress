@@ -1,0 +1,40 @@
+/*!
+ * WordPress Security Guide - Main Stylesheet
+ * 
+ * @version 2.0.0
+ * @author まーちゅう
+ * @description SCSS リファクタリング版
+ * @compiled 自動コンパイル
+ */
+
+// ===== Abstracts =====
+// 変数、関数、ミックスインなど（CSSを出力しない）
+@use "abstracts" as *;
+
+// ===== Base Styles =====
+// リセット、タイポグラフィ、アニメーション
+@use "base/reset";
+@use "base/typography";
+@use "base/animations";
+
+// ===== Layout =====
+// ページ全体の構造
+@use "layout/navigation";
+@use "layout/hero";
+@use "layout/sections";
+@use "layout/footer";
+
+// ===== Components =====
+// 再利用可能なコンポーネント
+@use "components/cards";
+@use "components/checklist";
+@use "components/resources";
+@use "components/troubleshooting";
+
+// ===== Utilities =====
+// ユーティリティクラス
+@use "utilities/helpers";
+
+// ===== Responsive =====
+// レスポンシブ対応
+@use "responsive/breakpoints";

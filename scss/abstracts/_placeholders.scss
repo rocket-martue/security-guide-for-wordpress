@@ -1,0 +1,46 @@
+// =============================================
+// Placeholders - WordPress Security Guide
+// =============================================
+// @extend で再利用可能な共通スタイル
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+%card-base {
+  @include card-base;
+  
+  &:hover {
+    @include card-hover;
+  }
+}
+
+%section-label {
+  font-family: $font-mono;
+  font-size: $text-xs;
+  font-weight: $font-semibold;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: $cyan-500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+  &::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+%visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

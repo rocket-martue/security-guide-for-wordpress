@@ -1,0 +1,136 @@
+// =============================================
+// Mixins - WordPress Security Guide
+// =============================================
+
+@use 'sass:map';
+@use 'variables' as *;
+
+// ===== レスポンシブミックスイン =====
+@mixin respond-to($breakpoint) {
+  @if map.has-key($breakpoints, $breakpoint) {
+    $value: map.get($breakpoints, $breakpoint);
+    @media (max-width: $value) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in $breakpoints map.";
+  }
+}
+
+// 使用例:
+// .element {
+//   font-size: 14px;
+//   @include respond-to('md') {
+//     font-size: 16px;
+//   }
+// }
+
+// ===== Flexbox Center =====
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ===== Absolute Center =====
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ===== カードスタイル =====
+@mixin card-base {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: $radius-md;
+  box-shadow: $shadow-sm;
+  transition: all $transition-smooth;
+}
+
+@mixin card-hover {
+  border-color: var(--border-accent);
+  box-shadow: $glow-cyan;
+  transform: translateY(-2px);
+}
+
+// ===== グラデーションテキスト =====
+@mixin gradient-text($colors...) {
+  background: linear-gradient(135deg, $colors);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ===== トランケート（省略記号） =====
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 複数行トランケート
+@mixin truncate-lines($lines: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ===== スクロールバースタイル =====
+@mixin custom-scrollbar($width: 6px, $track-color: $gray-50, $thumb-color: $gray-300) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: $track-color;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $thumb-color;
+    border-radius: calc($width / 2);
+  }
+}
+
+// ===== フォーカススタイル =====
+@mixin focus-ring($color: $cyan-500) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// ===== ホバートランジション =====
+@mixin hover-transition($property: all, $duration: $transition-base) {
+  transition: $property $duration;
+  
+  &:hover {
+    @content;
+  }
+}
+
+// ===== バッジスタイル =====
+@mixin badge($bg-color, $text-color: $white) {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background: rgba($bg-color, 0.08);
+  color: $bg-color;
+  font-size: $text-xs;
+  font-weight: $font-bold;
+  border-radius: $radius-sm;
+  letter-spacing: 0.05em;
+}
+
+// ===== Backdrop Blur =====
+@mixin backdrop-blur($amount: 20px) {
+  backdrop-filter: blur($amount) saturate(1.2);
+  -webkit-backdrop-filter: blur($amount) saturate(1.2);
+}
+
+// ===== Grid Auto Fit =====
+@mixin grid-auto-fit($min-width: 250px, $gap: $space-md) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax($min-width, 1fr));
+  gap: $gap;
+}

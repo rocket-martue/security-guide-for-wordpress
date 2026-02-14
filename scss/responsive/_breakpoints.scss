@@ -1,0 +1,79 @@
+// =============================================
+// Responsive Breakpoints - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// Mobile-first responsive design
+@include respond-to(mobile) {
+  .nav-links {
+    display: none;
+
+    &.open {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 64px;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
+      padding: $space-md;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .hero {
+    min-height: 90vh;
+    padding: 100px $space-lg 60px;
+
+    h1 {
+      font-size: $text-3xl;
+    }
+  }
+
+  .section {
+    padding: 60px $space-lg;
+  }
+
+  .principles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .principles-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-header {
+    padding: $space-lg;
+    gap: 14px;
+  }
+
+  .action-body {
+    padding: $space-lg;
+  }
+
+  .action-number {
+    font-size: $text-lg;
+    min-width: 40px;
+    height: 40px;
+  }
+
+  .checklist-phase {
+    padding: $space-lg;
+  }
+
+  .checklist-sticky-header {
+    margin: (-$space-lg) (-$space-lg) $space-md;
+    padding: 14px $space-lg;
+  }
+}

@@ -1,0 +1,44 @@
+// =============================================
+// Sections - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/placeholders' as *;
+
+.section {
+  max-width: $container-lg;
+  margin: 0 auto;
+  padding: $space-5xl $space-lg;
+
+  // セクションラベル
+  &-label {
+    @extend %section-label;
+    margin-bottom: $space-md;
+  }
+
+  // セクション見出し
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: $font-black;
+    letter-spacing: -0.02em;
+    margin-bottom: $space-md;
+    line-height: $leading-tight;
+  }
+
+  // セクション説明文
+  &-desc {
+    color: var(--text-secondary);
+    font-size: $text-base;
+    max-width: 640px;
+    margin-bottom: $space-2xl;
+    line-height: $leading-loose;
+  }
+}
+
+// セクション間の区切り線
+.section-divider {
+  max-width: $container-lg;
+  margin: 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-subtle), transparent);
+}

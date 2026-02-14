@@ -1,0 +1,40 @@
+// =============================================
+// Functions - WordPress Security Guide
+// =============================================
+
+@use 'sass:color';
+@use 'sass:math';
+
+// 色を明るくする
+@function lighten-color($color, $amount: 10%) {
+  @return color.adjust($color, $lightness: $amount);
+}
+
+// 色を暗くする
+@function darken-color($color, $amount: 10%) {
+  @return color.adjust($color, $lightness: -$amount);
+}
+
+// 透明度を追加
+@function alpha-color($color, $alpha: 0.5) {
+  @return rgba($color, $alpha);
+}
+
+// pxをremに変換
+@function px-to-rem($px, $base: 16px) {
+  @return math.div($px, $base) * 1rem;
+}
+
+// Map から値を取得（エラーハンドリング付き）
+@function get-color($colors, $key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+  @warn "Color key `#{$key}` not found in $colors map.";
+  @return null;
+}
+
+// スペーシングの計算
+@function spacing($multiplier: 1, $base: 16px) {
+  @return $base * $multiplier;
+}

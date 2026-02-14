@@ -1,0 +1,88 @@
+// =============================================
+// Navigation - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-fixed;
+  background: rgba($white, 0.88);
+  @include backdrop-blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: all $transition-smooth;
+
+  &-inner {
+    max-width: $container-xl;
+    margin: 0 auto;
+    padding: 0 $space-lg;
+    @include flex-center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  &-logo {
+    font-weight: $font-black;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-primary);
+    text-decoration: none;
+
+    .shield {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      border-radius: 7px;
+      @include flex-center;
+      font-size: 14px;
+      color: $white;
+      font-weight: $font-black;
+    }
+  }
+
+  &-links {
+    display: flex;
+    gap: 4px;
+    list-style: none;
+
+    a {
+      padding: 6px 14px;
+      border-radius: $radius-sm;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: $text-sm;
+      font-weight: $font-medium;
+      transition: all $transition-base;
+
+      &:hover {
+        color: var(--accent-cyan);
+        background: rgba(34, 211, 238, 0.06);
+      }
+    }
+  }
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $space-sm;
+
+  span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: var(--text-primary);
+    margin: 4px 0;
+    border-radius: 1px;
+    transition: $transition-smooth;
+  }
+}

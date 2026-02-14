@@ -1,0 +1,21 @@
+{
+  "name": "security-guide-for-wordpress",
+  "version": "2.0.0",
+  "description": "WordPress セキュリティガイド - SCSS リファクタリング版",
+  "scripts": {
+    "sass:watch": "sass --watch scss:css --style expanded",
+    "sass:build": "sass scss:css --style compressed",
+    "sass:dev": "sass scss:css --style expanded --source-map"
+  },
+  "keywords": [
+    "wordpress",
+    "security",
+    "scss",
+    "sass"
+  ],
+  "author": "まーちゅう",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.70.0"
+  }
+}

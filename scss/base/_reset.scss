@@ -1,0 +1,35 @@
+// =============================================
+// Reset & Base - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+// ===== Box Sizing Reset =====
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// ===== HTML =====
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+// ===== Body =====
+body {
+  font-family: $font-sans;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: $leading-relaxed;
+  font-size: $text-base;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+
+  // ===== Scrollbar =====
+  @include custom-scrollbar(6px, var(--bg-secondary), $gray-300);
+}

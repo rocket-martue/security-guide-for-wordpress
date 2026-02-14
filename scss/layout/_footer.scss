@@ -1,0 +1,58 @@
+// =============================================
+// Footer - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+
+.footer {
+  text-align: center;
+  padding: $space-2xl $space-lg;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: $space-4xl;
+
+  p {
+    font-size: $text-sm;
+    color: var(--text-muted);
+    line-height: $leading-relaxed;
+  }
+
+  &-logo {
+    font-weight: $font-black;
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: $space-sm;
+  }
+}
+
+// Principles Summary (フッター近くのコンポーネント)
+.principles-summary {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-md;
+  margin-top: $space-2xl;
+}
+
+.summary-card {
+  background: linear-gradient(135deg, rgba($cyan-500, 0.04), rgba($blue-500, 0.04));
+  border: 1px solid rgba($cyan-500, 0.12);
+  border-radius: $radius-md;
+  padding: $space-lg;
+  text-align: center;
+
+  .icon {
+    font-size: $text-2xl;
+    margin-bottom: $space-md;
+  }
+
+  h4 {
+    font-size: 14px;
+    font-weight: $font-bold;
+    margin-bottom: $space-sm;
+  }
+
+  p {
+    font-size: $text-sm;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+}

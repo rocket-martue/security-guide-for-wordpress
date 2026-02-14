@@ -1,0 +1,108 @@
+// =============================================
+// Troubleshooting - WordPress Security Guide
+// =============================================
+
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.trouble-card {
+  @include card-base;
+  border-radius: $radius-md;
+  overflow: hidden;
+  margin-bottom: $space-md;
+
+  &.open {
+    .trouble-toggle {
+      transform: rotate(45deg);
+    }
+
+    .trouble-body {
+      max-height: 600px;
+    }
+  }
+}
+
+.trouble-header {
+  padding: $space-lg $space-lg;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background $transition-base;
+  user-select: none;
+
+  &:hover {
+    background: var(--bg-card-hover);
+  }
+
+  h4 {
+    font-size: $text-base;
+    font-weight: $font-semibold;
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+
+    .case-num {
+      font-family: $font-mono;
+      font-size: $text-xs;
+      font-weight: $font-semibold;
+      color: var(--accent-amber);
+      background: rgba($amber-500, 0.08);
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+  }
+}
+
+.trouble-toggle {
+  font-size: $text-xl;
+  color: var(--text-muted);
+  transition: transform $transition-smooth;
+}
+
+.trouble-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &-inner {
+    padding: 0 $space-lg $space-lg;
+  }
+
+  h5 {
+    font-size: $text-sm;
+    font-weight: $font-bold;
+    color: var(--accent-cyan);
+    margin-bottom: 10px;
+    margin-top: $space-md;
+  }
+
+  ol {
+    padding-left: $space-lg;
+    color: var(--text-secondary);
+    font-size: 13.5px;
+  }
+
+  li {
+    margin-bottom: 6px;
+  }
+
+  .symptom-list {
+    list-style: none;
+    padding: 0;
+
+    li {
+      padding-left: $space-lg;
+      position: relative;
+
+      &::before {
+        content: "!";
+        position: absolute;
+        left: 0;
+        color: var(--accent-amber);
+        font-weight: $font-black;
+        font-size: $text-sm;
+      }
+    }
+  }
+}
