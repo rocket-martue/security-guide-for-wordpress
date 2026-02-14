@@ -2,8 +2,8 @@
 // Checklist - WordPress Security Guide
 // =============================================
 
-@use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
 
 // ===== Checklist Phase =====
 .checklist-phase {
@@ -19,7 +19,7 @@
   z-index: $z-sticky;
   background: var(--bg-card);
   padding: $space-md $space-xl;
-  margin: (-$space-xl) (-$space-xl) $space-lg;
+  margin: calc(#{$space-xl} * -1) calc(#{$space-xl} * -1) $space-lg;
   border-bottom: 1px solid var(--border-subtle);
   border-radius: $radius-lg $radius-lg 0 0;
   transition: box-shadow $transition-smooth;

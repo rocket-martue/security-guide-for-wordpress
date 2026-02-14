@@ -14,7 +14,7 @@
     "sass"
   ],
   "author": "まーちゅう",
-  "license": "MIT",
+  "license": "GPL-2.0-or-later",
   "devDependencies": {
     "sass": "^1.70.0"
   }

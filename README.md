@@ -41,6 +41,11 @@ WordPress を安全に運用するための基本的なセキュリティ対策�
 GitHub + Cloudflare Pages で静的ホスティングしています。  
 `main` ブランチへの push で自動デプロイされます。
 
+🌐 **公開先URL**: https://security-guide-for-wordpress.pages.dev/
+
 ## ライセンス
 
-MIT
+GPLv2 or later
+
+このプロジェクトは WordPress 本体と同じく GPLv2 or later ライセンスの下で公開されています。  
+自由に使用、改変、再配布できますが、派生物も同じライセンスで公開する必要があります。
